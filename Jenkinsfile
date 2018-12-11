@@ -13,7 +13,7 @@ node ("${SLAVE}") {
 
     stage('Testing') { 
         echo "Testing"
- //     sh "/apache-maven-3.5.4/bin/mvn pre-integration-test -f helloworld-ws/pom.xml"
+      sh "/apache-maven-3.5.4/bin/mvn pre-integration-test -f helloworld-ws/pom.xml"
        
     }
  //   stage('nexus') {
@@ -23,7 +23,7 @@ node ("${SLAVE}") {
     
    stage('Triggering job and fetching artefact after finishing') {
     build job: 'MNTLAB-kkalesnikava-child1-build-job', parameters: [string(name: 'Branch', value: 'kkalesnikava')]
-   // copyArtifacts filter: 'jobs.groovy', projectName: 'MNTLAB-kkalesnikava-child1-build-job'
+    copyArtifacts filter: 'jobs.groovy', fingerprintArtifacts: true, projectName: 'MNTLAB-kkalesnikava-child1-build-job', selector: lastSuccessful()
   
      //  }
        }
