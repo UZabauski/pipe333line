@@ -16,4 +16,10 @@ node ("${SLAVE}"){
 	    c: {sh '/opt/maven/bin/mvn post-integration-test -f helloworld-ws/pom.xml'}
 	)
     }
+    stage ('Trigger job, fetch artifact'){
+        build job: 'MNTLAB-ikazlouski-child1-build-job' ,
+                parameters: [[$class: 'StringParameterValue', name: 'BRANCH_NAME', value: "ikazlouski"]]
+        copyArtifacts filter: 'jobs.groovy',
+                projectName: 'MNTLAB-ikazlouski-child1-build-job'
+    }
 }
