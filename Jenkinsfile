@@ -19,7 +19,7 @@ node ("${SLAVE}"){
     stage ('Trigger job, fetch artifact'){
         build job: 'MNTLAB-ikazlouski-child1-build-job' ,
                 parameters: [[$class: 'StringParameterValue', name: 'BRANCH_NAME', value: "ikazlouski"]]
-        copyArtifacts filter: 'jobs.groovy',
+        copyArtifacts filter: 'ikazlouski_dsl_script.tar.gz	',
                 projectName: 'MNTLAB-ikazlouski-child1-build-job'
     }
 }
