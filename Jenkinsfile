@@ -13,7 +13,11 @@ node ("${SLAVE}") {
 
     stage('Testing') { 
         echo "Testing"
-      sh "mvn pre-integration-test -f helloworld-ws/pom.xml"
+      parallel(
+          a: {sh 'mvn pre-integration-test -f helloworld-ws/pom.xml'},
+          b: {sh 'mvn integration-test -f helloworld-ws/pom.xml'},
+          c: {sh 'mvn post-integration-test -f helloworld-ws/pom.xml'}
+)
        
     }
  //   stage('nexus') {
