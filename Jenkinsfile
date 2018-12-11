@@ -8,7 +8,7 @@ node {
     stage('Building code') { 
         echo "Building code"
 
-        sh "/apache-maven-3.5.4/bin/mvn compile -f helloworld-ws/pom.xml "
+        sh "mvn compile -f helloworld-ws/pom.xml "
   }
 
     stage('Testing') { 
