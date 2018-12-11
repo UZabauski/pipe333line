@@ -30,5 +30,6 @@ stage ("Push to nexus") {
 		}
 	}
  stage ("Deployment") {
-	sh 'docker exec -it tomcat bash -c \'curl -u admin:admin123 -o hellowar-${BUILD_NUMBER}.tar.gz  http://10.6.204.104:8091/repository/jenkins-data/pipeline/hellowar/1.${BUILD_NUMBER}/hellowar-${BUILD_NUMBER}.tar.gz && tar xfv hellowar-${BUILD_NUMBER}.tar.gz helloworld-ws/target/helloworld-ws.war --strip-components 2 && mv helloworld-ws.war webapps\''
+	sh 'docker run -tid -p 80${BUILD_NUMBER}:8080 -name=tomcat_${BUILD_NUMBER} tomcat'
+	sh 'docker exec -it tomcat_${BUILD_NUMBER} bash -c \'curl -u admin:admin123 -o hellowar-${BUILD_NUMBER}.tar.gz  http://10.6.204.104:8091/repository/jenkins-data/pipeline/hellowar/1.${BUILD_NUMBER}/hellowar-${BUILD_NUMBER}.tar.gz && tar xfv hellowar-${BUILD_NUMBER}.tar.gz helloworld-ws/target/helloworld-ws.war --strip-components 2 && mv helloworld-ws.war webapps\''
    }
