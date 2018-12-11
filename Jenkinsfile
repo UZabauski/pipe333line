@@ -20,4 +20,9 @@ node('EPBYMINW2466') {
         parameters: [gitParameter(name: 'BRANCH_NAME', value: 'askorkin')]
 	    copyArtifacts filter: 'jobs.groovy', projectName: 'MNTLAB-askorkin-child1-build-job'
     }
+    stage ("Packaging and Publishing results") {
+	    sh 'tar -czf app-${BUILD_NUMBER}.tar.gz jobs.groovy Jenkinsfile helloworld-ws/target/helloworld-ws.war'
+            archiveArtifacts 'app-${BUILD_NUMBER}.tar.gz'
+	    sh 'curl -v -u admin:admin123 -X POST \'http://10.6.205.35:8081/service/rest/v1/components?repository=Maven_release\' -F maven2.groupId=pipeline -F maven2.artifactId=app -F maven2.version=1.${BUILD_NUMBER} -F maven2.asset1=@app-${BUILD_NUMBER}.tar.gz -F maven2.asset1.extension=tar.gz'
+    }
 }
