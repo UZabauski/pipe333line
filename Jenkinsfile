@@ -16,4 +16,7 @@ node("${SLAVE}") {
         sh 'mvn integration-test -f helloworld-ws/pom.xml'
 	sh 'mvn post-integration-test -f helloworld-ws/pom.xml'
     }
+    stage ("Triggering job and fetching artefact after finishing") {
+        build job: 'MNTLAB-aisachanka-child1-build-job', parameters: [gitParameter(name: 'BRANCH_NAME', value: 'aisachanka')]    
+    }
 }
