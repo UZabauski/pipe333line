@@ -8,7 +8,7 @@ node("${SLAVE}") {
         userRemoteConfigs: [[url: 'https://github.com/MNT-Lab/pipe333line.git']]])
     }
     stage ("Building code") {
-        sh 'mvn clean install -f helloworld-ws/pom.xml'
+        sh 'mvn compile -f helloworld-ws/pom.xml'
 	sh 'mvn package -f helloworld-ws/pom.xml'
         
     }
