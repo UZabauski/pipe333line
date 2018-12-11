@@ -45,7 +45,7 @@ cd $(dirname /opt/tomcat) && unzip tomcat.zip && \
 mv apache-tomcat-7.0.91 tomcat && \
 rm -f /opt/tomcat/tomcat.zip && \
 useradd tomcat -u 1000 --no-create-home -d /opt/tomcat && \
-chown -R tomcat: \/opt/tomcat
+chown -R tomcat: /opt/tomcat
 USER tomcat
 ENV CATALINA_HOME=/opt/tomcat
 LABEL maintainer="Ihar Kazlouski"
