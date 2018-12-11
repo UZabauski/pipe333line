@@ -49,7 +49,7 @@ chown -R tomcat: /opt/tomcat
 USER tomcat
 ENV CATALINA_HOME=/opt/tomcat
 LABEL maintainer="Ihar Kazlouski"
-COPY helloworld-project/helloworld-ws/target/helloworld-ws.war /opt/tomcat/webapps/
+COPY helloworld-ws.war /opt/tomcat/webapps/
 EXPOSE 8090
 CMD bash /opt/tomcat/bin/catalina.sh run
 EOF'''
