@@ -1,4 +1,4 @@
-node { 
+node ("${SLAVE}") { 
     stage('Preparation (Checking out)') { 
         echo "Build step"
      checkout([$class: 'GitSCM', branches: [[name: '*/kkalesnikava']],
