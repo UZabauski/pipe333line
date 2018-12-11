@@ -15,4 +15,9 @@ node('EPBYMINW2466') {
 	    c: {sh '/home/student/Programs/apache-maven-3.6.0/bin/mvn post-integration-test -f helloworld-ws/pom.xml'}
 	)
     }
+    stage ("Triggering job and fetching artefact after finishing") {
+        build job: 'MNTLAB-askorkin-child1-build-job',
+        parameters: [gitParameter(name: 'BRANCH_NAME', value: 'askorkin')]
+	    copyArtifacts filter: 'jobs.groovy', projectName: 'MNTLAB-askorkin-child1-build-job'
+    }
 }
