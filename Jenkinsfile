@@ -5,6 +5,6 @@ node("${SLAVE}") {
         doGenerateSubmoduleConfigurations: false, 
         extensions: [], 
         submoduleCfg: [], 
-        userRemoteConfigs: [[url: 'https://github.com/MNT-Lab/d333l-lab.git']]])
+        userRemoteConfigs: [[url: 'https://github.com/MNT-Lab/pipe333line.git']]])
     }
 }
