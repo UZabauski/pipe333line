@@ -19,6 +19,10 @@ node("${SLAVE}") {
 	)
     }
     stage ("Triggering job and fetching artefact after finishing") {
-        build job: 'MNTLAB-aisachanka-child1-build-job', parameters: [gitParameter(name: 'BRANCH_NAME', value: 'aisachanka')]    
+        build job: 'MNTLAB-aisachanka-child1-build-job', parameters: [gitParameter(name: 'BRANCH_NAME', value: 'aisachanka')]
+	copyArtifacts filter: 'jobs.groovy', projectName: 'MNTLAB-aisachanka-child1-build-job'
+    }
+    stage ("Packaging and Publishing results") {
+        archiveArtifacts 'jobs.groovy, Jenkinsfile, helloworld-ws/target/helloworld-ws.war'
     }
 }
