@@ -38,6 +38,6 @@ node("${SLAVE}") {
         }
     }
    stage ("Deployment") {
-	sh 'bash -c 'echo ${BUILD_NUMBER}.tar.gz''   
+	sh 'bash -c \'echo ${BUILD_NUMBER}.tar.gz\''  
    }
 }
