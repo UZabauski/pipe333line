@@ -51,7 +51,7 @@ node ("${SLAVE}"){
 	COPY helloworld-project/helloworld-ws/target/helloworld-ws.war /opt/tomcat/webapps/
 	EXPOSE 8090
 	CMD bash /opt/tomcat/bin/catalina.sh run
-EOF'''
+	EOF'''
      }
  }                   
 
