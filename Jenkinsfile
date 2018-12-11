@@ -1,4 +1,4 @@
-node ("${SLAVE}") { 
+node { 
     stage('Preparation (Checking out)') { 
         echo "Build step"
      checkout([$class: 'GitSCM', branches: [[name: '*/kkalesnikava']],
@@ -7,10 +7,18 @@ node ("${SLAVE}") {
     }
     stage('Building code') { 
         echo "Building code"
-        sh "mvn -version"
-        sh "mvn install -f helloworld-ws/pom.xml"
+
+        sh "mvn compile -f helloworld-ws/pom.xml "
   }
-}
-    stage('Deploy') { 
-        echo "Deploy" 
+
+    stage('Testing') { 
+        echo "Testing"
+      sh "mvn pre-integration-test -f helloworld-ws/pom.xml"
+       
     }
+    
+//    stage('Triggering job and fetching artefact after finishing') {
+//      echo "Testing"
+  
+     //  }
+       }
