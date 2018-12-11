@@ -38,6 +38,6 @@ node("${SLAVE}") {
         }
     }
     stage ("Deployment") {
-        sh 'docker run -D tomcat'
+        sh 'docker run -d -p 8888:8080 tomcat'
     }
 }
