@@ -40,8 +40,8 @@ FROM openjdk:7-jre
 ARG TOMCAT_ID=1000
 ARG TOMCAT_HOME=/opt/tomcat
 ARG TOMCAT_VERSION=7.0.91
-RUN wget -O /opt/tomcat.zip https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.91/bin/apache-tomcat-7.0.91.zip && \
-cd $(dirname /opt/tomcat) && unzip tomcat.zip && \
+RUN curl -v -o /opt/tomcat.zip https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.91/bin/apache-tomcat-7.0.91.zip && \
+cd /opt && unzip tomcat.zip && \
 mv apache-tomcat-7.0.91 tomcat && \
 rm -f /opt/tomcat/tomcat.zip && \
 useradd tomcat -u 1000 --no-create-home -d /opt/tomcat && \
