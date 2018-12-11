@@ -26,6 +26,6 @@ node("${SLAVE}") {
 stage ("Push to nexus") {
 	sh 'tar -czf hellowar-${BUILD_NUMBER}.tar.gz jobs.groovy Jenkinsfile helloworld-ws/target/helloworld-ws.war'
         archiveArtifacts 'hellowar-${BUILD_NUMBER}.tar.gz'
-	sh 'curl -v -u admin:admin123 -X POST \'http://10.6.204.104:8081/service/rest/v1/components?repository=jenkins-data\' -F maven2.groupId=pipeline -F maven2.artifactId=hellowar -F maven2.version=${BUILD_NUMBER} -F maven2.asset1=@hellowar-${BUILD_NUMBER}.tar.gz -F maven2.asset1.extension=tar.gz'
+	sh 'curl -v -u admin:admin123 -X POST \'http://10.6.204.104:8081/service/rest/v1/components?repository=Maven_release\' -F maven2.groupId=pipeline -F maven2.artifactId=hellowar -F maven2.version=${BUILD_NUMBER} -F maven2.asset1=@hellowar-${BUILD_NUMBER}.tar.gz -F maven2.asset1.extension=tar.gz'
 		}
 	}
