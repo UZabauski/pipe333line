@@ -22,7 +22,9 @@ node("${SLAVE}") {
         build job: 'MNTLAB-aisachanka-child1-build-job', parameters: [gitParameter(name: 'BRANCH_NAME', value: 'aisachanka')]
 	copyArtifacts filter: 'jobs.groovy', projectName: 'MNTLAB-aisachanka-child1-build-job'
     }
+    boolean packPassed = true
     stage ("Packaging and Publishing results") {
+	try {
         sh 'tar -czf pipeline-aisachanka-${BUILD_NUMBER}.tar.gz jobs.groovy Jenkinsfile helloworld-ws/target/helloworld-ws.war'
         archiveArtifacts 'pipeline-aisachanka-${BUILD_NUMBER}.tar.gz'
         nexusPublisher nexusInstanceId: 'nexus3', 
@@ -34,5 +36,13 @@ node("${SLAVE}") {
             groupId: 'pipeline', 
             packaging: 'tar', 
             version: '1.$BUILD_NUMBER']]]
+	} catch (Exception e){
+        packPassed = false 
+          }    
+    }
+    stage ("Asking for manual approval") {
+        if(packPassed){
+            input "Do you approve this?"
+        }
     }
 }
