@@ -37,4 +37,7 @@ node("${SLAVE}") {
             input "Do you approve this?"
         }
     }
+    stage ("Deployment") {
+        sh 'docker run -D tomcat'
+    }
 }
