@@ -13,7 +13,7 @@ node ("${SLAVE}") {
 
     stage('Testing') { 
         echo "Testing"
-      sh "/apache-maven-3.5.4/bin/mvn pre-integration-test -f helloworld-ws/pom.xml"
+      sh "mvn pre-integration-test -f helloworld-ws/pom.xml"
        
     }
  //   stage('nexus') {
