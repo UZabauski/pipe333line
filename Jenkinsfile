@@ -11,4 +11,9 @@ node("${SLAVE}") {
         sh 'mvn compile -f helloworld-ws/pom.xml'
 	sh 'mvn package -f helloworld-ws/pom.xml'
     }
+    stage ("Testing") {
+        sh 'mvn pre-integration-test -f helloworld-ws/pom.xml'
+        sh 'mvn integration-test -f helloworld-ws/pom.xml'
+	sh 'mvn post-integration-test -f helloworld-ws/pom.xml'
+    }
 }
