@@ -7,7 +7,7 @@ node {
       
     stage('Maven build') {
     withMaven(jdk: 'java', maven: 'maven') {
-    sh 'mvn -f helloworld-ws/pom.xml package'
+    sh '/opt/maven/bin/mvn -f helloworld-ws/pom.xml package'
     }
   }
 }
