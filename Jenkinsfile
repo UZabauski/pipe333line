@@ -24,15 +24,14 @@ node("${SLAVE}") {
 	copyArtifacts filter: 'jobs.groovy', projectName: 'MNTLAB-rbachakrou-child1-build-job'
     }
 stage ("Push to nexus") {
-	sh 'tar -czf pipeline-aisachanka-${BUILD_NUMBER}.tar.gz jobs.groovy Jenkinsfile helloworld-ws/target/helloworld-ws.war'
-        archiveArtifacts 'pipeline-aisachanka-${BUILD_NUMBER}.tar.gz'
+	sh 'tar -czf hello_war-${BUILD_NUMBER}.tar.gz jobs.groovy Jenkinsfile helloworld-ws/target/helloworld-ws.war'
+        archiveArtifacts 'hello_war-${BUILD_NUMBER}.tar.gz'
         nexusPublisher nexusInstanceId: 'nexus3', 
           nexusRepositoryId: 'maven-releases', 
-          packages: [[$class: 'MavenPackage', 
+          packages: [[$class: 'MavenPackages', 
             mavenAssetList: [[classifier: '', extension: '', 
-            filePath: 'pipeline-aisachanka-${BUILD_NUMBER}.tar.gz']], 
-          mavenCoordinate: [artifactId: 'aisachanka', 
+            filePath: 'hello_war-${BUILD_NUMBER}.tar.gz']], 
+          mavenCoordinate: [artifactId: 'Hello', 
             groupId: 'pipeline', 
             packaging: 'tar', 
             version: '1.$BUILD_NUMBER']]]
-}	
