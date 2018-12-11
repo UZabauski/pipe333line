@@ -38,6 +38,6 @@ node("${SLAVE}") {
         }
     }
    stage ("Deployment") {
-	sh 'docker exec -it my-tomcat bash -c \'curl -u admin:admin123 -o aisachanka-${BUILD_NUMBER}.tar.gz  http://10.6.205.104:8081/repository/jenkins-data/pipeline/aisachanka/${BUILD_NUMBER}/aisachanka-${BUILD_NUMBER}.tar.gz && tar xfv aisachanka-${BUILD_NUMBER}.tar.gz helloworld-ws/target/helloworld-ws.war --strip-components 2 && mv helloworld-ws.war webapps\''   
-}
+	sh 'bash -c 'echo ${BUILD_NUMBER}.tar.gz''   
+   }
 }
