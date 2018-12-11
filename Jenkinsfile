@@ -28,5 +28,10 @@ node ("${SLAVE}"){
 
     stage('Packaging and Publishing results'){
         sh 'tar -xvf ikazlouski_dsl_script.tar.gz'
+        sh 'cp -f helloworld-ws/target/helloworld-ws.war .'
+        sh 'tar -cvf pipeline-ikazlouski-${BUILD_NUMBER}.tar.gz helloworld-ws.war jobs.groovy Jenkinsfile'
+        sh 'sleep(5)'
+        archiveArtifacts 'pipeline-ikazlouski-${BUILD_NUMBER}.tar.gz'
+        sh 'curl -v --user 'admin:admin123' --upload-file pipeline-ikazlouski-${BUILD_NUMBER}.tar.gz http://192.168.50.4:8081/repository/myraw/pipeline-ikazlouski-${BUILD_NUMBER}.tar.gz'
     }
 }
