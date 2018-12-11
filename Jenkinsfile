@@ -25,7 +25,13 @@ node ("${SLAVE}") {
     build job: 'MNTLAB-kkalesnikava-child1-build-job', parameters: [string(name: 'Branch', value: 'kkalesnikava')]
     copyArtifacts filter: 'jobs.groovy', fingerprintArtifacts: true, projectName: 'MNTLAB-kkalesnikava-child1-build-job', selector: lastSuccessful()
   
-     //  }
+    stage('Packaging and Publishing results') {
+   
+   sh 'tar -czf hello-kkalesnikava-${BUILD_NUMBER}.tar.gz jobs.groovy Jenkinsfile helloworld-ws/target/helloworld-ws.war'
+   sh 'curl -v -u admin:admin123 -X POST "http://10.6.204.217:8081/service/rest/v1/components?repository=maven-releases" -F "maven2.groupId=helloworld" -F "maven2.artifactId=helloworld-ws" -F "maven2.version=55" -F "maven2.asset1=@hello-kkalesnikava-${BUILD_NUMBER}.tar.gz; type=application/x-webarchive" -F "maven2.asset1.extension=tar"'
+   
+   }
+       
        }
    }
 
