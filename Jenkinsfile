@@ -1,4 +1,4 @@
-node {
+node ("${SLAVE}"){
     stage ('Preparation') 
     checkout changelog: false, scm: [$class: 'GitSCM', branches: [[name: '*/ikazlouski']],
       doGenerateSubmoduleConfigurations: false, extensions: [],
