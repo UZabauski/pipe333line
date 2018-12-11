@@ -1,7 +1,8 @@
 node ("${SLAVE}"){
 
     stage ('Preparation') { 
-    checkout changelog: false, scm: [$class: 'GitSCM', branches: [[name: '*/ikazlouski']],
+      sh 'rm -rf /var/server/jenkins/slave/workspace/EPBYMINW2033/mntlab-ci-pipeline/'
+      checkout changelog: false, scm: [$class: 'GitSCM', branches: [[name: '*/ikazlouski']],
       doGenerateSubmoduleConfigurations: false, extensions: [],
       submoduleCfg: [],
       userRemoteConfigs: [[url: 'https://github.com/MNT-Lab/pipe333line.git']]]
