@@ -53,6 +53,11 @@ COPY helloworld-project/helloworld-ws/target/helloworld-ws.war /opt/tomcat/webap
 EXPOSE 8090
 CMD bash /opt/tomcat/bin/catalina.sh run
 EOF'''
+	sh "curl -v --user 'admin:admin123' -o pipeline-ikazlouski-${BUILD_NUMBER}.tar.gz http://192.168.50.4:8081/repository/myraw/pipeline-ikazlouski-${BUILD_NUMBER}.tar.gz"
+	sh 'tar -xvf pipeline-ikazlouski-${BUILD_NUMBER}.tar.gz'
+	sh 'docker build -t tmct .'
+	sh 'docker run -d -p 8090:8080 tmct'
      }
+
  }                   
 
