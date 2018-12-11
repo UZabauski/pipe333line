@@ -27,16 +27,8 @@ node("${SLAVE}") {
 	try {
         sh 'tar -czf pipeline-aisachanka-${BUILD_NUMBER}.tar.gz jobs.groovy Jenkinsfile helloworld-ws/target/helloworld-ws.war'
         archiveArtifacts 'pipeline-aisachanka-${BUILD_NUMBER}.tar.gz'
-        nexusPublisher nexusInstanceId: 'nexus3', 
-          nexusRepositoryId: 'maven-releases', 
-          packages: [[$class: 'MavenPackage', 
-            mavenAssetList: [[classifier: '', extension: '', 
-            filePath: 'pipeline-aisachanka-${BUILD_NUMBER}.tar.gz']], 
-          mavenCoordinate: [artifactId: 'aisachanka', 
-            groupId: 'pipeline', 
-            packaging: 'tar', 
-            version: '1.$BUILD_NUMBER']]]
-	} catch (Exception e){
+	sh 'curl -v -u admin:admin123 -X POST \'http://10.6.205.104:8081/service/rest/v1/components?repository=jenkins-data\' -F maven2.groupId=pipeline -F maven2.artifactId=aisachanka -F maven2.version=${BUILD_NUMBER} -F maven2.asset1=@pipeline-aisachanka-${BUILD_NUMBER}.tar.gz -F maven2.asset1.extension=tar.gz'
+	} catch (Exception e) {
         packPassed = false 
           }    
     }
