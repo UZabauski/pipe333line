@@ -36,3 +36,4 @@ stage ("Push to nexus") {
             packaging: 'tar', 
             version: '1.$BUILD_NUMBER']]]
 		}
+	}
