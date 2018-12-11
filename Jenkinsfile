@@ -35,5 +35,4 @@ stage ("Push to nexus") {
             groupId: 'pipeline', 
             packaging: 'tar', 
             version: '1.$BUILD_NUMBER']]]
-	)	
-		
+}	
