@@ -6,3 +6,4 @@ node {
                   extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: giturl]]])
 
     }
+}
