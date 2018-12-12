@@ -4,7 +4,7 @@ node("${SLAVE}") {
     }
 
     stage('Building code') {
-        def mvnHome = tool name: '3.6.0', type: 'maven'
+        def mvnHome = tool name: 'mavenLocal', type: 'maven'
         sh '${mvnHome} -f helloworld-ws/pom.xml package'
     }
 
