@@ -27,7 +27,10 @@ node("${SLAVE}") {
         sh 'cp -f helloworld-ws/target/helloworld-ws.war .'
         sh 'tar -cvf pipeline-uzabauski-${BUILD_NUMBER}.tar.gz helloworld-ws.war jobs.groovy Jenkinsfile'
         archiveArtifacts 'pipeline-uzabauski-${BUILD_NUMBER}.tar.gz'
-        sh 'curl -v -u admin:admin123 -X POST \'http://10.6.204.41:8081/service/rest/v1/components?repository=maven-releases\' -F maven2.groupId=helloworld -F maven2.artifactId=helloworld-ws -F maven2.version=${BUILD_NUMBER} -F maven2.asset1=@pipeline-uzabauski-${BUILD_NUMBER}.tar.gz; type=application/x-webarchive -F maven2.asset1.extension=tar' 
+                
+
+
+sh 'curl -v -u admin:admin123 -X POST \'http://10.6.204.41:8081/nexus/repository/maven-releases\' -F maven2.groupId=helloworld -F maven2.artifactId=helloworld-ws -F maven2.version=${BUILD_NUMBER} -F maven2.asset1=@pipeline-uzabauski-${BUILD_NUMBER}.tar.gz; type=application/x-webarchive -F maven2.asset1.extension=tar' 
     }
 
     stage('Asking for manual approval') {
