@@ -55,6 +55,10 @@ EOF'''
             sh 'docker pull 10.6.204.217:8082/kkalesnikava-hello-world:${BUILD_NUMBER}'
             sh 'docker run -d -p 9090:8080 tomcat_kkalesnikava'
         } 
+        stage('Email') {
+            emailext attachLog: true, body: 'Test mail', subject: 'Pipeline-${BUILD_NUMBER}', to: 'kkoles556@gmail.com'
+        }
+        
     }
     }
 }
