@@ -1,8 +1,6 @@
 node("${SLAVE}") {
     stage('Preparation') {
-        steps {
-            checkout scm
-        }
+        checkout scm
     }
 
     stage('Building code') {
