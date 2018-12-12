@@ -52,7 +52,7 @@ EOF'''
        }     
         
         stage('Download') { 
-               sh 'docker pull 110.6.204.217:8082/repository/docker-private/kkalesnikava-hello-world:mytag'
+               sh 'docker pull 10.6.204.217:8082/repository/docker-private/kkalesnikava-hello-world:mytag'
                sh 'docker run -d -p 9090:8080 tomcat_kkalesnikava'
     } 
             
