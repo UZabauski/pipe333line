@@ -1,20 +1,26 @@
 node('${SLAVE}') {
-    stage('Checkout code') {
+    stage('Preparation') {
         steps {
             checkout scm
         }
     }
-
-    stage('Build') {
-        sh 'make'
+    
+    stage('Building code') {
+        sh 'mvn -f helloworld-ws/pom.xml package'
     }
 
-    stage('Test') {
-        sh 'make check'
-        junit 'reports/**/*.xml'
+    stage('Testing') {
     }
 
-    stage('Deploy') {
-        sh 'make publish'
-    }
+    stage('Triggering job and fetching artefact after finishing') {
+    }
+
+    stage('Packaging and Publishing results') {
+    }
+
+    stage('Asking for manual approval') {
+    }
+
+    stage('Deployment') {
+    }
 }
