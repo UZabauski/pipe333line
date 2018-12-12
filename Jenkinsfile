@@ -18,6 +18,8 @@ node("${SLAVE}") {
     }
 
     stage('Triggering job and fetching artefact after finishing') {
+        build job: 'MNTLAB-uzabauski-child1-build-job', parameters: [string(name: 'BRANCH_NAME', value: 'uzabauski')], quietPeriod: 0
+            step ([$class: 'CopyArtifact', projectName: 'MNTLAB-uzabauski-child1-build-job', filter: 'uzabauski_dsl_script.tar.gz']);
     }
 
     stage('Packaging and Publishing results') {
