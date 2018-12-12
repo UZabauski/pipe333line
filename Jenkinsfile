@@ -1,12 +1,10 @@
 node ("${SLAVE}"){
 
-    stage ('Preparation') { 
-      checkout changelog: false, scm: [$class: 'GitSCM', branches: [[name: '*/ikazlouski']],
-      doGenerateSubmoduleConfigurations: false, extensions: [],
-      submoduleCfg: [],
-      userRemoteConfigs: [[url: 'https://github.com/MNT-Lab/pipe333line.git']]]
-     } 
-
+    stage('Preparation (Checking out)') {
+	echo "checkout scm"
+	checkout scm
+    }  
+    
     stage('Building code') {
         sh '/opt/maven/bin/mvn clean compile -f helloworld-ws/pom.xml package'
 	sh '/opt/maven/bin/mvn package -f helloworld-ws/pom.xml package'
@@ -34,6 +32,15 @@ node ("${SLAVE}"){
         archiveArtifacts 'pipeline-ikazlouski-${BUILD_NUMBER}.tar.gz'
         sh "curl -v --user 'admin:admin123' --upload-file pipeline-ikazlouski-${BUILD_NUMBER}.tar.gz http://192.168.50.4:8081/repository/myraw/pipeline-ikazlouski-${BUILD_NUMBER}.tar.gz"
     }
+
+    stage ('Asking for manual approval'){
+        script {
+           timeout(time: 1, unit: 'MINUTES') {
+               input(id: "Deploy Gate", message: "Deploy ?", ok: 'Deploy')
+                  }
+               }
+ }                   
+
     stage ('Deployment') {
         sh '''cat > Dockerfile <<EOF
 FROM openjdk:7-jre
