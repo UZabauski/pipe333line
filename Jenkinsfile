@@ -1,3 +1,6 @@
+tool name: 'mavenLocal', type: 'maven'
+tool name: 'java8', type: 'jdk'
+
 node ("${SLAVE}") { 
     
     stage('Preparation (Checking out)') {
@@ -7,7 +10,8 @@ node ("${SLAVE}") {
     
     stage('Building code') { 
         echo "Building code"
-
+        tool name: 'mavenLocal', type: 'maven'
+        tool name: 'java8', type: 'jdk'
         sh "mvn compile -f helloworld-ws/pom.xml "
   }
 
