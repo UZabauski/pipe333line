@@ -41,7 +41,7 @@ node ("${SLAVE}") {
 FROM tomcat
 RUN curl -u admin:admin123 -o pipeline-kkalesnikava-${BUILD_NUMBER}.tar.gz http://10.6.204.217:8081/repository/maven-releases/helloworld/helloworld-ws/55/helloworld-ws-55.tar -L && \
 tar -xvf pipeline-kkalesnikava-${BUILD_NUMBER}.tar.gz && \
-mv helloworld-ws.war /usr/local/tomcat/webapps
+mv helloworld-ws/target/helloworld-ws.war /usr/local/tomcat/webapps
 EXPOSE 9090
 CMD bash /usr/local/tomcat/bin/catalina.sh run
 EOF'''
