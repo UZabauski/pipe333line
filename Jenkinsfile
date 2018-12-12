@@ -1,4 +1,4 @@
-node('${SLAVE}') {
+node("${SLAVE}") {
     stage('Preparation') {
         steps {
             checkout scm
