@@ -1,15 +1,11 @@
 node("${SLAVE}") {
+    def mvnHome = tool name: 'mavenLocal', type: 'maven'
     stage("Preparation") {
-        checkout([$class: 'GitSCM', 
-        branches: [[name: '*/aisachanka']], 
-        doGenerateSubmoduleConfigurations: false, 
-        extensions: [], 
-        submoduleCfg: [], 
-        userRemoteConfigs: [[url: 'https://github.com/MNT-Lab/pipe333line.git']]])
+        checkout scm 
     }
     stage ("Building code") {
         sh 'mvn compile -f helloworld-ws/pom.xml'
-	sh 'mvn package -f helloworld-ws/pom.xml'
+	sh '${mvnHome}/bin/mvn package -f helloworld-ws/pom.xml'
     }
     stage ("Testing") {
 	parallel(
