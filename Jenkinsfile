@@ -1,4 +1,10 @@
 node('${SLAVE}') {
+    stage('Checkout code') {
+        steps {
+            checkout scm
+        }
+    }
+
     stage('Build') {
         sh 'make'
     }
