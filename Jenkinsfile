@@ -45,7 +45,9 @@ mv helloworld-ws/target/helloworld-ws.war /usr/local/tomcat/webapps
 CMD bash /usr/local/tomcat/bin/catalina.sh run
 EOF'''
            sh 'docker build -t tomcat_kkalesnikava .'
-           sh 'docker run -d -p 9090:8080 tomcat_kkalesnikava'
+           sh 'docker tag tomcat_kkalesnikava 10.6.204.217:8082/kkalesnikava-hello-world:mytag'
+           sh 'docker push 10.6.204.217:8082/kkalesnikava-hello-world:mytag'
+       //    sh 'docker run -d -p 9090:8080 tomcat_kkalesnikava'
        }     
             
             
