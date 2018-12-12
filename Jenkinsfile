@@ -10,6 +10,7 @@ node ("${SLAVE}") {
         tool name: 'mavenLocal', type: 'maven'
         tool name: 'java8', type: 'jdk'
         sh "mvn package -f helloworld-ws/pom.xml "
+        sh "mvn -version"
   }
 
     stage('Testing') { 
