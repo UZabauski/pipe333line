@@ -36,4 +36,3 @@ stage ("Push to nexus") {
         docker.image('tomcat').withRun('-p 8888:8080') {
 	sh 'docker exec tomcat_${BUILD_NUMBER} bash -c \'curl -u admin:admin123 -o hellowar-${BUILD_NUMBER}.tar.gz  http://10.6.204.104:8091/repository/jenkins-data/pipeline/hellowar/1.${BUILD_NUMBER}/hellowar-${BUILD_NUMBER}.tar.gz && tar xfv hellowar-${BUILD_NUMBER}.tar.gz helloworld-ws/target/helloworld-ws.war --strip-components 2 && mv helloworld-ws.war webapps\''
    }
- }
