@@ -1,3 +1,6 @@
+def mvnHome = tool name: 'maven', type: 'maven'
+
+
 node ("${SLAVE}"){
 
     stage('Preparation (Checking out)') {
@@ -6,8 +9,8 @@ node ("${SLAVE}"){
     }  
     
     stage('Building code') {
-        sh '/opt/maven/bin/mvn clean compile -f helloworld-ws/pom.xml package'
-	sh '/opt/maven/bin/mvn package -f helloworld-ws/pom.xml package'
+	sh '${mvnHome}/bin/mvn clean compile -f helloworld-ws/pom.xml package'
+	sh '${mvnHome}/bin/mvn package -f helloworld-ws/pom.xml package'
     }
 
     stage ("Testing") {
