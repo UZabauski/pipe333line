@@ -31,6 +31,9 @@ node("${SLAVE}") {
     }
 
     stage('Asking for manual approval') {
+        timeout(time:60, unit:'SECONDS') {
+            input message:'Do you want to approval this build?'
+        }
     }
 
     stage('Deployment') {
