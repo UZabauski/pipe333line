@@ -9,7 +9,7 @@ node ("${SLAVE}") {
         echo "Building code"
         tool name: 'mavenLocal', type: 'maven'
         tool name: 'java8', type: 'jdk'
-        sh "mvn compile -f helloworld-ws/pom.xml "
+        sh "mvn package -f helloworld-ws/pom.xml "
   }
 
     stage('Testing') { 
@@ -48,9 +48,13 @@ EOF'''
            sh 'docker build -t tomcat_kkalesnikava .'
            sh 'docker tag tomcat_kkalesnikava 10.6.204.217:8082/kkalesnikava-hello-world:mytag'
            sh 'docker push 10.6.204.217:8082/kkalesnikava-hello-world:mytag'
-       //    sh 'docker run -d -p 9090:8080 tomcat_kkalesnikava'
+        
        }     
-            
+        
+        stage('Download') { 
+               sh 'docker pull 110.6.204.217:8082/repository/docker-private/kkalesnikava-hello-world:mytag'
+               sh 'docker run -d -p 9090:8080 tomcat_kkalesnikava'
+    } 
             
         }
    }
