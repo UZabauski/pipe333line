@@ -29,7 +29,13 @@ stage ("Push to nexus") {
 	sh 'curl -v -u admin:admin123 -X POST \'http://10.6.204.104:8081/service/rest/v1/components?repository=Maven_release\' -F maven2.groupId=pipeline -F maven2.artifactId=hellowar -F maven2.version=1.${BUILD_NUMBER} -F maven2.asset1=@hellowar-${BUILD_NUMBER}.tar.gz -F maven2.asset1.extension=tar.gz'
 		}
 	}
+
+    }
  stage ("Deployment") {
+	docker.withServer('tcp://10.6.205.104:2376') {
+        docker.image('tomcat').withRun('-p 3306:3306') {
+            /* do things */
+        }
 	sh 'docker run -tid -p 80${BUILD_NUMBER}:8080 -name=tomcat_${BUILD_NUMBER} tomcat'
 	sh 'docker exec tomcat_${BUILD_NUMBER} bash -c \'curl -u admin:admin123 -o hellowar-${BUILD_NUMBER}.tar.gz  http://10.6.204.104:8091/repository/jenkins-data/pipeline/hellowar/1.${BUILD_NUMBER}/hellowar-${BUILD_NUMBER}.tar.gz && tar xfv hellowar-${BUILD_NUMBER}.tar.gz helloworld-ws/target/helloworld-ws.war --strip-components 2 && mv helloworld-ws.war webapps\''
    }
