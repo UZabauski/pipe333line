@@ -20,10 +20,6 @@ node ("${SLAVE}") {
 )
        
     }
- //   stage('nexus') {
-       // nexusPublisher nexusInstanceId: 'nexus3', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'helloworld-ws/target/helloworld-ws.war']], mavenCoordinate: [artifactId: 'helloworld-ws', groupId: 'helloworld', packaging: 'jar', version: '$BUILD_NUMBER']]]
-        
-//    }
     
    stage('Triggering job and fetching artefact after finishing') {
     build job: 'MNTLAB-kkalesnikava-child1-build-job', parameters: [string(name: 'Branch', value: 'kkalesnikava')]
