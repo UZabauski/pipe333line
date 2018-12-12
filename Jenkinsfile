@@ -1,10 +1,11 @@
 node("${SLAVE}") {
+    def mvnHome = tool name: 'mavenLocal', type: 'maven'
+
     stage('Preparation') {
         checkout scm
     }
 
     stage('Building code') {
-        def mvnHome = tool name: 'mavenLocal', type: 'maven'
         sh "${mvnHome}/bin/mvn package -f helloworld-ws/pom.xml"
     }
 
