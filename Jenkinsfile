@@ -45,7 +45,6 @@ node ("${SLAVE}") {
            mv helloworld-ws.war /usr/local/tomcat/webapps
            EXPOSE 9090
            CMD bash /usr/local/tomcat/bin/catalina.sh run
-           
            EOF'''
            sh 'docker build -t tomcat_kkalesnikava .'
            sh 'docker run -d -p 9090:9090 tomcat_kkalesnikava'
