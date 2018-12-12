@@ -10,9 +10,9 @@ node("${SLAVE}") {
 
     stage('Testing') {
         parallel (
-        pre-test: {sh "${mvnHome}/bin/mvn pre-integration-test -f helloworld-ws/pom.xml"},
+        preTest: {sh "${mvnHome}/bin/mvn pre-integration-test -f helloworld-ws/pom.xml"},
         test: {sh "${mvnHome}/bin/mvn integration-test -f helloworld-ws/pom.xml"},
-        post-test: {sh "${mvnHome}/bin/mvn post-integration-test -f helloworld-ws/pom.xml"}
+        postTest: {sh "${mvnHome}/bin/mvn post-integration-test -f helloworld-ws/pom.xml"}
         )
     }
 
