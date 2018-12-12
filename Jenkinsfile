@@ -4,8 +4,8 @@ node('${SLAVE}') {
             checkout scm
         }
     }
-    
-    stage('Building code') {
+
+    stage('Building code') {
         sh 'mvn -f helloworld-ws/pom.xml package'
     }
 
