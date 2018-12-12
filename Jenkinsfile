@@ -1,6 +1,3 @@
-tool name: 'mavenLocal', type: 'maven'
-tool name: 'java8', type: 'jdk'
-
 node ("${SLAVE}") { 
     
     stage('Preparation (Checking out)') {
